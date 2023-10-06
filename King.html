@@ -73,13 +73,53 @@
     .mypostingbox>button {
       width: 100%;
     }
-    
+
     .full-img {
       height: 400px;
       background-size: contain;
       background-position: 50% 50%;
       background-repeat: no-repeat;
       background-color: #e0e0e0;
+    }
+
+    #chrbox {
+      width: 1000px;
+      height: 200px;
+      margin: 30px auto 30px auto;
+      background-color: white;
+      color: black;
+      border-radius: 5px;
+    }
+
+    .chrbox>h1 {
+      text-align: center;
+    }
+
+    #textarea {
+      width: 600px;
+      height: 100px;
+      margin: 10px 50px 10px 50px;
+    }
+
+    #btn {
+      width: 50px;
+      height: 50px;
+      margin: 0px 10px 0px 940px;
+    }
+
+    .chrcmt {
+      color: black;
+    }
+
+    .form {
+      margin: 10px;
+      width: 980px;
+    }
+
+    #cmtcard {
+      color: black;
+      margin: 0 auto;
+      width: 800px;
     }
   </style>
   <script type='module'>
@@ -171,7 +211,30 @@
     $("#savebtn").click(async function () {
       $('#postingbox').toggle();
     })
+    // 코멘트 작성 스크립트
+    $("#btn").click(async function () {
+      let temp = $("#floatingTextarea").val();
+      let doc = {
+        'comment': temp
+      }
+      await addDoc(collection(db, "comments"), doc);
+      alert('응원의 한마디 전송 성공');
+      window.location.reload();
+    })
 
+    docs = await getDocs(collection(db, "comments"));
+    docs.forEach((doc) => {
+      let row = doc.data();
+      let comment = row['comment'];
+      let temp_html = `<div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="card-text">${comment}</p>
+          </div>
+        </div>
+      </div>`;
+      $("#cmtcard").append(temp_html);
+    })
   </script>
   <script>
     // 이미지 변환 함수
@@ -265,7 +328,18 @@
 
   <!-- 응원하기 입력 부분 : 응원 내용 적기, 응원하기 버튼, 응원 내용 리스트 형으로 표현  담당자 : 이태기  -->
   <div>
-
+    <div class="chrbox" id="chrbox">
+      <h1 class="chrcmt">응원하기</h1>
+      <div class="form-floating">
+        <textarea class="form" placeholder="코멘트를 남겨주세요" id="floatingTextarea"></textarea>
+        <label for="floatingTextarea"></label>
+      </div>
+      <button type="button" id="btn" class="chrcmt btn-outline-light me-2">입력</button>
+    </div>
+  </div>
+  <div class="mycards">
+    <div id="cmtcard" class="row row-cols-1 row-cols-md-1 g-4">
+    </div>
   </div>
 </body>
 

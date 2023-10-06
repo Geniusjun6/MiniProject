@@ -17,10 +17,21 @@
 
     .main {
       color: white;
+      height: 400px;
 
-      background-image: url("https://cdn.pixabay.com/photo/2014/07/24/21/35/mortality-401222_1280.jpg");
+      background-image: url("https://c.wallhere.com/photos/a7/74/1920x1080_px_Code_coding_programming_Simple_Background-1291425.jpg!d");
       background-position: center;
       background-size: cover;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main>button {
+      margin: 50px auto 0px auto;
+      width: 500px;
     }
 
     body {
@@ -106,10 +117,10 @@
     fetch(url).then(res => res.json()).then(data => {
       let temp = data['temp'];
 
-      if (temp > 10) {
-        $('#temperature').text('더워요');
+      if (temp > 23) {
+        $('#temperature').text('더워도');
       } else {
-        $('#temperature').text('추워요');
+        $('#temperature').text('추워도');
       }
     })
 
@@ -147,57 +158,19 @@
 </head>
 
 <body>
-  <!-- 상단 네비게이션 메뉴 부분 : 삭제 가능할것 같기도.. 삭제 -->
-  <header class="p-3 text-bg-dark">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-            <use xlink:href="#bootstrap"></use>
-          </svg>
-        </a>
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li>
-            <a href="#" class="nav-link px-2 text-danger">Spartaflix</a>
-          </li>
-          <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Series</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Movie</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">내가 찜한 콘텐츠</a></li>
-          <!-- 요고를 활용해서 재밌게 표현 할 수 있지 않으까요? 더워도 도전, 추워도 도전 등 -->
-          <li><a href="#" class="nav-link px-2 text-white">현재 서울의 날씨 : <span id="temperature"></span></a></li>
-        </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
-            aria-label="Search" />
-        </form>
-
-        <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">
-            Login
-          </button>
-          <button type="button" class="btn btn-danger">Sign-up</button>
-        </div>
-      </div>
-    </div>
-  </header>
   <!-- 메인(포스터) 부분 : 배경 이미지, 내용, 버튼 수정 담당자 : 문준식 -->
   <div class="main">
-    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-      <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">킹덤</h1>
-        <p class="col-md-8 fs-4">
-          병든 왕을 둘러싸고 흉흉한 소문이 떠돈다. 어둠에 뒤덮인 조선, 기이한
-          역병에 신음하는 산하. 정체 모를 악에 맞서 백성을 구원할 희망은 오직
-          세자뿐이다.
-        </p>
-        <button id="savebtn" type="button" class="btn btn-outline-light">영화 기록하기</button>
-        <button type="button" class="btn btn-outline-light">상세정보</button>
-      </div>
-    </div>
+    <h1>자바스크립트 <span style="color:red">끝판왕</span> 모집</h1>
+    <p></p>
+    <h5>자바스크립트, Node 마스터를 찾습니다!</h5>
+    <p></p>
+    <h3><span style="color:red">끝판왕 개발자</span>가 되기 위해 도전하세요!</h3>
+    <p></p>
+    <p>우리는 <span id="temperature" style="color:red"></span> 도전을 멈추지 않습니다 !</p>
+
+    <button id="savebtn" type="button" class="btn btn-outline-danger">끝판왕 도전하기!</button>
   </div>
+
   <!-- 신청자 프로필 받는 부분(모달창으로 띄울 수는 없을까요?) : 요소 구성(개인 페이지), 버튼 수정, 이미지 업로드 기능 추가 담당자 : 고병옥 -->
   <div class="mypostingbox" id="postingbox">
     <div class="form-floating mb-3">

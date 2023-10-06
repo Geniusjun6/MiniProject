@@ -147,6 +147,7 @@
 </head>
 
 <body>
+  <!-- 상단 네비게이션 메뉴 부분 : 삭제 가능할것 같기도.. -->
   <header class="p-3 text-bg-dark">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -164,7 +165,8 @@
           <li><a href="#" class="nav-link px-2 text-white">Series</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Movie</a></li>
           <li><a href="#" class="nav-link px-2 text-white">내가 찜한 콘텐츠</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">현재 서울의 날씨 : <span id="temperature"></span></a></li>
+          <li><a href="#" class="nav-link px-2 text-white">현재 서울의 날씨 : <span id="temperature"></span></a></li> // 요고를
+          활용해서 재밌게 표현 할 수 있지 않으까요? 더워도 도전, 추워도 도전 등
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -181,6 +183,7 @@
       </div>
     </div>
   </header>
+  <!-- 메인(포스터) 부분 : 배경 이미지, 내용, 버튼 수정 -->
   <div class="main">
     <div class="p-5 mb-4 bg-body-tertiary rounded-3">
       <div class="container-fluid py-5">
@@ -190,13 +193,12 @@
           역병에 신음하는 산하. 정체 모를 악에 맞서 백성을 구원할 희망은 오직
           세자뿐이다.
         </p>
-        <button id="savebtn" type="button" class="btn btn-outline-light">
-          영화 기록하기
-        </button>
+        <button id="savebtn" type="button" class="btn btn-outline-light">영화 기록하기</button>
         <button type="button" class="btn btn-outline-light">상세정보</button>
       </div>
     </div>
   </div>
+  <!-- 신청자 프로필 받는 부분(모달창으로 띄울 수는 없을까요?) : 요소 구성(개인 페이지), 버튼 수정, 이미지 업로드 기능 추가 -->
   <div class="mypostingbox" id="postingbox">
     <div class="form-floating mb-3">
       <input type="email" class="form-control" id="image" placeholder="영화 이미지 주소" />
@@ -225,6 +227,7 @@
     </div>
     <button id="postingbtn" type="button" class="btn btn-danger">기록하기</button>
   </div>
+  <!-- 프로필 카드 부분 : 팀원 카드 고정, 신청자 프로필 입력 시 자동 추가, 카드 클릭 시 개인 페이지 이동 -->
   <div class="mycards">
     <div id="card" class="row row-cols-1 row-cols-md-4 g-4">
     </div>

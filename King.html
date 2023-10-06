@@ -8,6 +8,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
@@ -33,8 +38,8 @@
     }
 
     .mypostingbox {
-      width: 500px;
-      margin: 20px auto 0px auto;
+      /* width: 500px; */
+      /* margin: 20px auto 0px auto; */
       border: 1px solid white;
       border-radius: 8px;
       padding: 20px;
@@ -42,16 +47,16 @@
 
     .form-floating>input {
       background-color: transparent;
-      color: white;
+      /* color: white; */
     }
 
     .form-floating>label {
-      color: white;
+      /* color: white; */
     }
 
     .input-group>label {
       background-color: transparent;
-      color: white;
+      /* color: white; */
     }
 
     .mypostingbox>button {
@@ -91,6 +96,11 @@
       let star = $('#star').val();
       let comment = $('#comment').val();
 
+      // 이미지가 파일로 업로드시 base64 처리
+      if ($('#image').attr('type') == 'file') {
+        image = await uploadImage($('#image'));
+      }
+      
       let doc = {
         'image': image,
         'title': title,
@@ -144,6 +154,30 @@
     })
 
   </script>
+  <script>
+    // 이미지 변환 함수
+    const convertBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+
+        fileReader.onload = () => {
+          resolve(fileReader.result);
+        };
+
+        fileReader.onerror = (error) => {
+          reject(error);
+        };
+      });
+    };
+
+    // 이미지처리
+    const uploadImage = async (obj) => {
+      const file = obj[0].files[0];
+      return await convertBase64(file);
+    };
+
+  </script>
 </head>
 
 <body>
@@ -193,40 +227,62 @@
           역병에 신음하는 산하. 정체 모를 악에 맞서 백성을 구원할 희망은 오직
           세자뿐이다.
         </p>
-        <button id="savebtn" type="button" class="btn btn-outline-light">영화 기록하기</button>
-        <button type="button" class="btn btn-outline-light">상세정보</button>
+        <!-- <button id="savebtn" type="button" class="btn btn-outline-light">영화 기록하기</button>
+        <button type="button" class="btn btn-outline-light">상세정보</button> -->
+        <button id="applybtn" type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+          data-bs-target="#applymodal">지원하기</button>
       </div>
     </div>
   </div>
   <!-- 신청자 프로필 받는 부분(모달창으로 띄울 수는 없을까요?) : 요소 구성(개인 페이지), 버튼 수정, 이미지 업로드 기능 추가 담당자 : 고병옥 -->
-  <div class="mypostingbox" id="postingbox">
-    <div class="form-floating mb-3">
-      <input type="email" class="form-control" id="image" placeholder="영화 이미지 주소" />
-      <label for="floatingInput">영화 이미지 주소</label>
-    </div>
-    <div class="form-floating mb-3">
-      <input type="email" class="form-control" id="title" placeholder="영화 제목" />
-      <label for="floatingInput">영화 제목</label>
-    </div>
 
-    <div class="input-group mb-3">
-      <label class="input-group-text" for="inputGroupSelect01">별점</label>
-      <select class="form-select" id="star">
-        <option selected>별점 선택</option>
-        <option value="⭐">⭐</option>
-        <option value="⭐⭐">⭐⭐</option>
-        <option value="⭐⭐⭐">⭐⭐⭐</option>
-        <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
-        <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
-      </select>
-    </div>
 
-    <div class="form-floating mb-3">
-      <input type="email" class="form-control" id="comment" placeholder="영화 추천 이유" />
-      <label for="floatingInput">영화 추천 이유</label>
+  <!-- Modal -->
+  <div class="modal fade" id="applymodal" tabindex="-1" aria-labelledby="applymodalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="applymodalLabel">지원하기</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mypostingbox" id="postingbox">
+            <div class="mb-3">
+              <label for="form-label">영화 이미지</label>
+              <input type="file" class="form-control" id="image" placeholder="영화 이미지" />
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="title" placeholder="영화 제목" />
+              <label for="floatingInput">영화 제목</label>
+            </div>
+
+            <div class="input-group mb-3">
+              <label class="input-group-text" for="inputGroupSelect01">별점</label>
+              <select class="form-select" id="star">
+                <option selected>별점 선택</option>
+                <option value="⭐">⭐</option>
+                <option value="⭐⭐">⭐⭐</option>
+                <option value="⭐⭐⭐">⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
+              </select>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="comment" placeholder="영화 추천 이유" />
+              <label for="floatingInput">영화 추천 이유</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+          <button id="postingbtn" type="button" class="btn btn-secondary">지원하기</button>
+        </div>
+      </div>
     </div>
-    <button id="postingbtn" type="button" class="btn btn-danger">기록하기</button>
   </div>
+
+
   <!-- 프로필 카드 부분 : 팀원 카드 고정, 신청자 프로필 입력 시 자동 추가, 카드 클릭 시 개인 페이지 이동   담당자 : 오예찬 -->
   <div class="mycards">
     <div id="card" class="row row-cols-1 row-cols-md-4 g-4">

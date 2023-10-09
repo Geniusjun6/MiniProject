@@ -20,6 +20,7 @@
       font-family: "Noto Sans KR", sans-serif;
     }
 
+    /* 메인 타이틀 부분 */
     .main {
       color: white;
       height: 400px;
@@ -39,6 +40,7 @@
       width: 500px;
     }
 
+    /* 카드 부분 */
     body {
       background-color: black;
     }
@@ -61,10 +63,6 @@
       /* color: white; */
     }
 
-    .form-floating>label {
-      /* color: white; */
-    }
-
     .input-group>label {
       background-color: transparent;
       /* color: white; */
@@ -80,6 +78,34 @@
       background-position: 50% 50%;
       background-repeat: no-repeat;
       background-color: #e0e0e0;
+    }
+
+    .cheering {
+      width: 1200px;
+      margin: 30px auto 30px auto;
+
+      color: white;
+      border-radius: 5px;
+
+    }
+
+    /* 요고는 없어도 되는것 같습니다. 
+    #textarea {
+      width: 100%;
+      height: 100px;
+      margin: 10px 50px 10px 50px;
+    } */
+
+    /* class=chrbox 에서 이미 글자색을 흰색으로 먹여서 굳이 필요 없어 보입니다.
+    #chrcmt {
+      color: white;
+    }
+    */
+
+    .cheer_cmt {
+      color: black;
+      width: 1200px;
+      margin: 100px auto 30px auto;
     }
   </style>
   <script type='module'>
@@ -171,7 +197,36 @@
     $("#savebtn").click(async function () {
       $('#postingbox').toggle();
     })
+    // 코멘트 작성 스크립트
+    $("#cheerbtn").click(async function () {
+      let temp = $("#floatingTextarea").val();
+      let doc = {
+        'comment': temp
+      }
 
+      // 기존에는 값을 입력하지 않아도 데이터가 쌓여있어서 조건문을 추가했습니다.
+      if (typeof temp == null || temp == "undefined" || temp == "") {
+        alert('응원 메시지를 입력해 주세요.')
+      } else {
+        await addDoc(collection(db, "comments"), doc);
+        alert('응원의 한마디 전송 성공');
+        window.location.reload();
+      }
+    })
+
+    docs = await getDocs(collection(db, "comments"));
+    docs.forEach((doc) => {
+      let row = doc.data();
+      let comment = row['comment'];
+      let temp_html = `<div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="card-text">${comment}</p>
+          </div>
+        </div>
+      </div>`;
+      $("#cmtcard").append(temp_html);
+    })
   </script>
   <script>
     // 이미지 변환 함수
@@ -215,8 +270,6 @@
   </div>
 
   <!-- 신청자 프로필 받는 부분(모달창으로 띄울 수는 없을까요?) : 요소 구성(개인 페이지), 버튼 수정, 이미지 업로드 기능 추가 담당자 : 고병옥 -->
-
-
   <!-- Modal -->
   <div class="modal fade" id="applymodal" tabindex="-1" aria-labelledby="applymodalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -256,7 +309,6 @@
     </div>
   </div>
 
-
   <!-- 프로필 카드 부분 : 팀원 카드 고정, 신청자 프로필 입력 시 자동 추가, 카드 클릭 시 개인 페이지 이동   담당자 : 오예찬 -->
   <div class="mycards">
     <div id="card" class="row row-cols-1 row-cols-md-4 g-4">
@@ -264,8 +316,18 @@
   </div>
 
   <!-- 응원하기 입력 부분 : 응원 내용 적기, 응원하기 버튼, 응원 내용 리스트 형으로 표현  담당자 : 이태기  -->
-  <div>
+  <!-- 이거저것 만져보다가.. 자꾸 이상하게 나와서 제가 부트스트랩으로 따로 조정했어요 ㅠ by.준식  -->
+  <div class="cheering">
+    <label for="exampleInputEmail1" class="form-label">도전자에게 응원의 한마디를 남겨주세요!</label>
+    <input type="email" class="form-control" id="floatingTextarea" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text" style="color: gray;">당신의 한마디가 도전자에게 큰 힘이 됩니다.</div>
+    <button type="submit" id=cheerbtn class="btn btn-outline-light" style="float:right">응원하기</button>
+  </div>
 
+  <!-- 리스트의 배경색을 투명 or 검정으로하고 텍스트만 나오게 할 수 있을까요? -->
+  <div class="cheer_cmt">
+    <div id="cmtcard" class="row row-cols-1 row-cols-md-1 g-4">
+    </div>
   </div>
 </body>
 

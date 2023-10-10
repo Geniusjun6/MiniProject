@@ -45,6 +45,21 @@
       background-color: black;
     }
 
+    .team {
+      width: 1200px;
+      margin: 20px auto 20px auto;
+
+      flex-direction: row;
+    }
+
+    .line {
+      width: 50%;
+      height: 5px;
+      background-color: white;
+
+      margin: 50px auto 50px auto;
+    }
+
     .mycards {
       width: 1200px;
       margin: 20px auto 20px auto;
@@ -310,7 +325,67 @@
   </div>
 
   <!-- 프로필 카드 부분 : 팀원 카드 고정, 신청자 프로필 입력 시 자동 추가, 카드 클릭 시 개인 페이지 이동   담당자 : 오예찬 -->
+  <div class="team">
+    <h1 style="color: white;">[8조 도전자]</h1>
+    <p></p>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <!-- 문준식 카드 -->
+      <div class="col">
+        <div class="card h-100">
+          <div class="full-img" style="background-image: url('https://i.ibb.co/18mCLwq/image.jpg');">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">문준식</h5>
+            <p class="card-text">개인페이지</p>
+            <p class="card-text">각오 한마디</p>
+          </div>
+        </div>
+      </div>
+      <!-- 고병옥 카드 -->
+      <div class="col">
+        <div class="card h-100">
+          <div class="full-img" style="background-image: url('');">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">고병옥</h5>
+            <p class="card-text">개인페이지</p>
+            <p class="card-text">각오 한마디</p>
+          </div>
+        </div>
+      </div>
+      <!-- 이태기 카드 -->
+      <div class="col">
+        <div class="card h-100">
+          <div class="full-img" style="background-image: url('');">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">이태기</h5>
+            <p class="card-text">개인페이지</p>
+            <p class="card-text">각오 한마디</p>
+          </div>
+        </div>
+      </div>
+      <!-- I wan't you 포스터 -->
+      <div class="col">
+        <div class="card h-100">
+          <div class="full-img"
+            style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c0/I_want_you.jpg');">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">다음 도전자는 너!</h5>
+            <p></p>
+            <p class="card-text">지금 바로 끝판왕에 도전하세요 !</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="line"></div>
+
   <div class="mycards">
+    <h2 style="color: white;">[신규 도전자]</h2>
+    <p></p>
     <div id="card" class="row row-cols-1 row-cols-md-4 g-4">
     </div>
   </div>

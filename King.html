@@ -52,6 +52,18 @@
       flex-direction: row;
     }
 
+    #junsik {
+      cursor: pointer;
+    }
+
+    #byungok {
+      cursor: pointer;
+    }
+
+    #taeki {
+      cursor: pointer;
+    }
+
     .line {
       width: 50%;
       height: 5px;
@@ -192,7 +204,7 @@
       }
     })
 
-
+    // 도전자 정보 입력 부분
     let docs = await getDocs(collection(db, "movies"));
     docs.forEach((doc) => {
       let row = doc.data();
@@ -206,10 +218,11 @@
       
       <div class="col">
         <div class="card h-100">
-          <div class="full-img" style="background-image: url('${image}');"></div>
+          <a href = "${page}" target="_blank">
+            <div class="full-img" style="background-image: url('${image}');"></div>
+          </a>
           <div class="card-body">
             <h5 class="card-title">${title}</h5>
-            <p class="card-text">${page}</p>
             <p class="card-text">${comment}</p>
           </div>
         </div>
@@ -217,6 +230,12 @@
       $('#card').append(temp_html);
 
     });
+
+    // 팀원 카드 내 이미지 클릭 시 새창에서 개인 페이지 띄우기
+    $('#junsik').click(function () {
+      url = "https://geniusjun6.tistory.com/";
+      window.open(url)
+    })
 
     $("#savebtn").click(async function () {
       $('#postingbox').toggle();
@@ -305,7 +324,7 @@
         <div class="modal-body">
           <div class="mypostingbox" id="postingbox">
             <div class="mb-3">
-              <label for="form-label">도전자 사진</label>
+              <label for="form-label">도전자 사진 (840*1,200px 권장)</label>
               <input type="file" class="form-control" id="image" placeholder="도전자 이미지" />
             </div>
             <div class="form-floating mb-3">
@@ -341,23 +360,22 @@
       <!-- 문준식 카드 -->
       <div class="col">
         <div class="card h-100">
-          <div class="full-img" style="background-image: url('https://i.ibb.co/18mCLwq/image.jpg');">
+          <div id="junsik" class="full-img" style="background-image: url('https://i.ibb.co/18mCLwq/image.jpg')"
+            style="cursor:pointer">
           </div>
           <div class="card-body">
             <h5 class="card-title">문준식</h5>
-            <p class="card-text">개인페이지</p>
-            <p class="card-text">각오 한마디</p>
+            <p class="card-text">끝판왕이 될때까지 멈추지 않는다.</p>
           </div>
         </div>
       </div>
       <!-- 고병옥 카드 -->
       <div class="col">
         <div class="card h-100">
-          <div class="full-img" style="background-image: url('');">
+          <div id="byungok" class="full-img" style="background-image: url('');">
           </div>
           <div class="card-body">
             <h5 class="card-title">고병옥</h5>
-            <p class="card-text">개인페이지</p>
             <p class="card-text">각오 한마디</p>
           </div>
         </div>
@@ -365,11 +383,10 @@
       <!-- 이태기 카드 -->
       <div class="col">
         <div class="card h-100">
-          <div class="full-img" style="background-image: url('');">
+          <div id="taeki" class="full-img" style="background-image: url('');">
           </div>
           <div class="card-body">
             <h5 class="card-title">이태기</h5>
-            <p class="card-text">개인페이지</p>
             <p class="card-text">각오 한마디</p>
           </div>
         </div>
